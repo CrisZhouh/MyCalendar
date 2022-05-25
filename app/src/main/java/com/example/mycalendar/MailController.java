@@ -23,8 +23,12 @@ public class MailController extends Activity {
     private final String TAG = "myTag";
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     Button sendBtn;
+    Button sendBtn_add;
+    Button sendBtn_delete;
     EditText txtphoneNo;
     EditText txtMessage;
+    EditText txtMessage_add;
+    EditText txtMessage_delete;
     TextView textView;
     private EditText login_et_sms_code;
     private SMSContentObserver smsContentObserver;
@@ -47,8 +51,14 @@ public class MailController extends Activity {
         setContentView(R.layout.mail_controller);
 
         sendBtn = (Button) findViewById(R.id.btnSendSMS);
+        sendBtn_add = (Button) findViewById(R.id.btnSendSMS_add);
+        sendBtn_delete = (Button) findViewById(R.id.btnSendSMS_delete);
+
         txtphoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
         txtMessage = (EditText) findViewById(R.id.editTextSMS);
+        txtMessage_add = (EditText) findViewById(R.id.editTextSMS_add);
+        txtMessage_delete = (EditText) findViewById(R.id.editTextSMS_delete);
+
         textView = (TextView)findViewById(R.id.display);
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +67,22 @@ public class MailController extends Activity {
                 sendSMSMessage();
             }
         });
+
+        sendBtn_add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                textView.setText("");
+                sendSMSMessage_add();
+            }
+        });
+
+        sendBtn_delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                textView.setText("");
+                sendSMSMessage_delete();
+            }
+        });
+
+
         smsContentObserver = new SMSContentObserver(MailController.this, mHandler);
     }
 
@@ -99,6 +125,44 @@ public class MailController extends Activity {
             e.printStackTrace();
         }
     }
+    protected void sendSMSMessage_add() {
+
+        String phoneNo = txtphoneNo.getText().toString();
+        String message = "add"+txtMessage_add.getText().toString()+"/"+txtMessage.getText().toString();
+        Log.i(TAG, "sendSMSMessage_delete: "+message);
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, message, null, null);
+            Toast.makeText(getApplicationContext(), "SMS sent.",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),
+                    "SMS faild, please try again."+e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+    protected void sendSMSMessage_delete() {
+
+        String phoneNo = txtphoneNo.getText().toString();
+        String message = "delete"+txtMessage_delete.getText().toString()+"/"+txtMessage.getText().toString();
+        Log.i(TAG, "sendSMSMessage_delete: "+message);
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, message, null, null);
+            Toast.makeText(getApplicationContext(), "SMS sent.",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),
+                    "SMS faild, please try again."+e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -26,6 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -209,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(MainActivity.this, EditScheduleActivity.class);
         String sch = ((TextView) v).getText().toString().split("：")[1];
         intent.putExtra("schedule",sch);
+        Log.i(TAG, "editSchedule: "+sch);
         startActivity(intent);
     }
 
@@ -232,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("Range")
     private void setSmsCode() {
-        Boolean flag=false;
+
         Cursor cursor = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             int hasReadSmsPermission = checkSelfPermission(Manifest.permission.READ_SMS);
@@ -249,26 +253,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (cursor != null) { // 当接受到的新短信与想要的短信做相应判断
                 String body = "";
                 String number = "";
-                while (cursor.moveToNext()&&!flag) {
+                while (cursor.moveToNext()) {
                     body = cursor.getString(cursor.getColumnIndex("body"));// 在这里获取短信信息
                     number = cursor.getString(cursor.getColumnIndex("address"));// 在这里获取短信信息
-                    // 下面匹配验证码
-                    Log.i(TAG, "setSmsCode: "+body);
-                    String[]temp=MailqueryByDate(body);
-                    for(int i =0;i<temp.length;i++){
-                        Log.i(TAG, "setSmsCode: "+temp[i]);
-                    }
-                    sendMessage(number,temp);
-                    flag=true;
 
-//                    Pattern pattern = Pattern.compile("\\d{6}");
-//                    Matcher matcher = pattern.matcher(body);
-//                    if (matcher.find()) {
-//                        String smsCodeStr = matcher.group(0);
-//                        Log.i("fuyanan", "sms find: code=" + matcher.group(0));// 打印出匹配到的验证码
-//                        login_et_sms_code.setText(smsCodeStr);
-//                        break;
-//                    }
+
+                    Pattern pattern_add = Pattern.compile("add(.*)data(.*)");
+                    Matcher matcher_add = pattern_add.matcher(body);
+                    Pattern pattern_delete = Pattern.compile("delete(.*)data(.*)");
+                    Matcher matcher_delete = pattern_delete.matcher(body);
+                    if (matcher_add.find()) {
+                        String[] split_tmp = matcher_add.group(0).split("add");
+                        String[] add_date = split_tmp[1].split("data");
+                        Log.i("fuyanan", add_date[0]+" "+add_date[1]);// 打印出匹配到的验证
+                        ContentValues values_add = new ContentValues();
+                        //第一个参数是表中的列名
+                        values_add.put("scheduleDetail",add_date[0]);
+                        values_add.put("time",add_date[1]);
+                        myDatabase.insertWithOnConflict("schedules",null,values_add,SQLiteDatabase.CONFLICT_REPLACE);
+
+                    }
+                    else if (matcher_delete.find()) {
+                        String[] split_tmp = matcher_delete.group(0).split("delete");
+                        String[] delete_date = split_tmp[1].split("data");
+                        Log.i("fuyanan", delete_date[0]+" "+delete_date[1]);// 打印出匹配到的验证
+                        ContentValues values_add = new ContentValues();
+                        //第一个参数是表中的列名
+                        values_add.put("scheduleDetail",delete_date[0]);
+                        values_add.put("time",delete_date[1]);
+                        myDatabase.delete("schedules","scheduleDetail=?",new String[]{delete_date[0]});
+                    }
+                    else{
+                        // 下面匹配验证码
+                        Log.i(TAG, "setSmsCode: "+body);
+                        String[]temp=MailqueryByDate(body);
+                        for(int i =0;i<temp.length;i++){
+                            Log.i(TAG, "setSmsCode: "+temp[i]);
+                        }
+                        sendMessage(number,temp);
+                    }
+
                 }
             }
         } catch (Exception e) {
@@ -322,4 +346,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+
+
 }

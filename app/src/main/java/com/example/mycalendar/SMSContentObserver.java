@@ -2,7 +2,9 @@ package com.example.mycalendar;
 
 import android.content.Context;
 import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * 类说明：监听短信有两种方式：第一通过接受系统短息广播;第二监听短信数据库
@@ -26,10 +28,12 @@ public class SMSContentObserver extends ContentObserver {
      * selfChange:回调后，其值一般为false，该参数意义不大
      */
     @Override
-    public void onChange(boolean selfChange) {
+    public void onChange(boolean selfChange, Uri uri) {
+        Log.i("myTag", "onChange: "+uri);
         // TODO Auto-generated method stub
         super.onChange(selfChange);
-        mHandler.obtainMessage(MSG_INBOX, "SMS Received").sendToTarget();
+        if(uri.toString().equals("content://sms/raw"))mHandler.obtainMessage(MSG_INBOX, "SMS Received").sendToTarget();
+
     }
 
 }

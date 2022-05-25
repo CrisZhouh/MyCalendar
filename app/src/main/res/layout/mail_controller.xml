@@ -8,7 +8,7 @@
         android:id="@+id/textViewPhoneNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone_label" />
+        android:text="请输入手机号码" />
 
     <EditText
         android:id="@+id/editTextPhoneNo"
@@ -28,14 +28,51 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"/>
 
-    <Button android:id="@+id/btnSendSMS"
+    <Button
+        android:id="@+id/btnSendSMS"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/send_sms_label"/>
+        android:text="查询" />
 
     <TextView
         android:id="@+id/display"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="91dp" />
+
+    <TextView
+        android:id="@+id/textViewMessage3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sms_label2" />
+
+    <EditText
+        android:id="@+id/editTextSMS_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnSendSMS_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加" />
+
+    <TextView
+        android:id="@+id/textViewMessage4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sms_label3" />
+
+    <EditText
+        android:id="@+id/editTextSMS_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnSendSMS_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除" />
 
 </LinearLayout>
