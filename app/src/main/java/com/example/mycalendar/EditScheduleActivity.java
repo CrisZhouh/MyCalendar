@@ -35,11 +35,11 @@ public class EditScheduleActivity extends AppCompatActivity implements View.OnCl
         mySQLiteOpenHelper = new MySQLiteOpenHelper(this);
         myDatabase = mySQLiteOpenHelper.getWritableDatabase();
 
-        editBtn = findViewById(R.id.editBtn);
+        editBtn = (Button)findViewById(R.id.editBtn);
         editBtn.setOnClickListener(this);
-        deleteBtn = findViewById(R.id.deleteSchedule);
+        deleteBtn = (Button)findViewById(R.id.deleteSchedule);
         deleteBtn.setOnClickListener(this);
-        scheduleInput = findViewById(R.id.scheduleInput);
+        scheduleInput = (EditText)findViewById(R.id.scheduleInput);
         scheduleInput.setText(schedule);
     }
 

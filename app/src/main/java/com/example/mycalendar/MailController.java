@@ -94,7 +94,7 @@ public class MailController extends Activity {
                     Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(),
-                    "SMS faild, please try again.",
+                    "SMS faild, please try again."+e.getMessage(),
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

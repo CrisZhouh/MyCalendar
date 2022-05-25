@@ -1,9 +1,9 @@
 package com.example.mycalendar;
 
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.View;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper{
     private static final String db_name = "MySchedule";//自定义的数据库名；

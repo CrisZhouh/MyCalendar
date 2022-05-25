@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mySchedule[] = new TextView[5];
     private final String TAG = "myTag";
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private Button search_bt;
 
     private EditText login_et_sms_code;
     private SMSContentObserver smsContentObserver;
@@ -100,9 +101,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mySchedule[2] = findViewById(R.id.schedule3);
         mySchedule[3] = findViewById(R.id.schedule4);
         mySchedule[4] = findViewById(R.id.schedule5);
+
+        search_bt = (Button)findViewById(R.id.search_bt);
+
         for(TextView v:mySchedule){
             v.setOnClickListener(this);
         }
+
+        Search();
+
+    }
+
+    private void Search(){
+        search_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private CalendarView.OnDateChangeListener mySelectDate = new CalendarView.OnDateChangeListener() {
@@ -263,28 +280,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//2022-5-21
-private String[] MailqueryByDate(String date) {
-    String[] dateEvent ;
-    //columns为null 查询所有列
-    Cursor cursor = myDatabase.query("schedules",null,"time=?",new String[]{date},null,null,null);
-    int count=cursor.getCount();
-    Log.i(TAG, "MailqueryByDate: "+count);
-    dateEvent = new String[count];
-    if(cursor.moveToFirst()){
-        int scheduleCount=0;
-        do{
-            @SuppressLint("Range") String aScheduleDetail = cursor.getString(cursor.getColumnIndex("scheduleDetail"));
-            dateEvent[scheduleCount]="日程"+(scheduleCount+1)+"："+aScheduleDetail;
+    //2022-5-21
+    private String[] MailqueryByDate(String date) {
+        String[] dateEvent ;
+        //columns为null 查询所有列
+        Cursor cursor = myDatabase.query("schedules",null,"time=?",new String[]{date},null,null,null);
+        int count=cursor.getCount();
+        Log.i(TAG, "MailqueryByDate: "+count);
+        dateEvent = new String[count];
+        if(cursor.moveToFirst()){
+            int scheduleCount=0;
+            do{
+                @SuppressLint("Range") String aScheduleDetail = cursor.getString(cursor.getColumnIndex("scheduleDetail"));
+                dateEvent[scheduleCount]="日程"+(scheduleCount+1)+"："+aScheduleDetail;
 
-            scheduleCount++;
+                scheduleCount++;
 
-        }while (cursor.moveToNext());
-        return dateEvent;
+            }while (cursor.moveToNext());
+            return dateEvent;
+        }
+        cursor.close();
+        return null;
     }
-    cursor.close();
-    return null;
-}
 
 
     private void sendMessage(String number,String[] message) {

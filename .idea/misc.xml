@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/drawable-v24/search_btn.xml" value="0.1" />
+        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_change.xml" value="0.1" />
         <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_edit_schedule.xml" value="0.16134751773049646" />
-        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_search.xml" value="0.1" />
+        <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/activity_text.xml" value="0.1" />
         <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/calendar_view.xml" value="0.28351449275362317" />
         <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/layout/mail_controller.xml" value="0.20878623188405798" />
         <entry key="..\:/Android/Projects/MyCalendar/app/src/main/res/menu/main.xml" value="0.2962962962962963" />
