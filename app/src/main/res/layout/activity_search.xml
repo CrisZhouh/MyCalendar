@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/backto"/>
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="320dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:background="@drawable/search"/>
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/search_btn"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+    </ListView>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:visibility="gone"
+        android:text = "查询结果有以下几条:"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text = ""/>
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:textColor="#17E910"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:text="修改"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text = ""/>
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:textColor="#17E910"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:text="修改"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text = ""/>
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:textColor="#17E910"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:text="修改"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text = ""/>
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:textColor="#17E910"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:text="修改"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text = ""/>
+        <Button
+            android:id="@+id/bt5"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:textColor="#17E910"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:text="修改"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#17E910"
+        android:visibility="gone"
+        android:text="删除"/>
+
+
+</LinearLayout>
