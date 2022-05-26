@@ -11,10 +11,10 @@
         android:text="请输入手机号码" />
 
     <EditText
-        android:id="@+id/editTextPhoneNo"
+        android:id="@+id/editTextSMS"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"/>
+        android:inputType="textMultiLine" />
 
     <TextView
         android:id="@+id/textViewMessage"
@@ -23,10 +23,10 @@
         android:text="@string/sms_label" />
 
     <EditText
-        android:id="@+id/editTextSMS"
+        android:id="@+id/editTextPhoneNo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"/>
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/btnSendSMS"

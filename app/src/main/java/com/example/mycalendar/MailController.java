@@ -3,8 +3,12 @@ package com.example.mycalendar;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,6 +34,8 @@ public class MailController extends Activity {
     EditText txtMessage_add;
     EditText txtMessage_delete;
     TextView textView;
+    private SQLiteDatabase myDatabase;
+    private MySQLiteOpenHelper mySQLiteOpenHelper;
     private EditText login_et_sms_code;
     private SMSContentObserver smsContentObserver;
     protected static final int MSG_INBOX = 1;
@@ -49,7 +55,7 @@ public class MailController extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mail_controller);
-
+        mySQLiteOpenHelper = new MySQLiteOpenHelper(this);
         sendBtn = (Button) findViewById(R.id.btnSendSMS);
         sendBtn_add = (Button) findViewById(R.id.btnSendSMS_add);
         sendBtn_delete = (Button) findViewById(R.id.btnSendSMS_delete);
@@ -131,6 +137,7 @@ public class MailController extends Activity {
         String message = "add"+txtMessage_add.getText().toString()+"/"+txtMessage.getText().toString();
         Log.i(TAG, "sendSMSMessage_delete: "+message);
         try {
+            onBackPressed(txtMessage.getText().toString(),txtMessage_add.getText().toString());
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, message, null, null);
             Toast.makeText(getApplicationContext(), "SMS sent.",
@@ -204,6 +211,38 @@ public class MailController extends Activity {
                 cursor.close();
             }
         }
+    }
+
+
+    public void onBackPressed(String date,String detail) {
+        new AlertDialog.Builder(this).setTitle("是否也添加到你的日程中？")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        myDatabase = mySQLiteOpenHelper.getWritableDatabase();
+                        ContentValues values_add = new ContentValues();
+                        //第一个参数是表中的列名
+                        values_add.put("scheduleDetail",detail);
+                        values_add.put("time",date);
+                        myDatabase.insertWithOnConflict("schedules",null,values_add, SQLiteDatabase.CONFLICT_REPLACE);
+
+
+
+
+//                        MailController.this.finish();
+
+                    }
+                })
+                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“返回”后的操作,这里不设置没有任何操作
+                    }
+                }).show();
     }
 
 
